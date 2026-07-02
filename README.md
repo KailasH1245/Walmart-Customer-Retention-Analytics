@@ -106,6 +106,5 @@ Based on the data, the following actions are recommended to improve retention:
 │
 ├── Reports/
 │   ├── Walmart_Report.pdf              # Full analytical report
-│   └── Presentation_Slides.pptx        # Executive summary
 │
 └── README.md                           # This file
