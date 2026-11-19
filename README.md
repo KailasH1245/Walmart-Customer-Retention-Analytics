@@ -1,90 +1,41 @@
-# 🛍️ Walmart Customer Retention & Churn Analytics (Power BI)
+# 🛍️ Walmart Customer Retention & Churn Analytics
 
-> **Executive Summary:** An end-to-end Power BI diagnostic solution analyzing customer churn drivers, loyalty tier performance, and promotional ROI across multi-table retail transaction and customer data.
+[![Power BI](https://img.shields.io/badge/Power%20BI-Desktop-F2C811?style=flat&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com/)
+[![DAX](https://img.shields.io/badge/DAX-Data%20Modeling-0078D4?style=flat&logo=microsoft&logoColor=white)](https://learn.microsoft.com/en-us/dax/)
+[![Data Modeling](https://img.shields.io/badge/Schema-5--Table%20Relational-2E8B57?style=flat)](https://github.com/KailasH1245/Walmart-Customer-Retention-Analytics)
 
-![Walmart Churn & Retention Dashboard](Page%201.png)
-
----
-
-## 📋 Table of Contents
-- [Key Business Insights](#-key-business-insights)
-- [Data Model & DAX Architecture](#️-data-model--dax-architecture)
-- [Dashboard Walkthrough](#-dashboard-walkthrough)
-- [Strategic Recommendations](#-strategic-recommendations)
-- [Repository Structure](#-repository-structure)
-- [How to Run](#-how-to-run)
+An end-to-end retail retention and churn intelligence solution built on **multi-table Walmart customer and transaction data**. This project unifies 5 normalized retail datasets into a **4-page interactive Power BI diagnostic report** backed by custom **DAX measures**, behavioral segmentation tiers, and executive documentation.
 
 ---
 
-## 📊 Key Business Insights
-
-Diagnostic analysis revealed a critical retention bottleneck: **49.67% of the customer base (149 of 300 customers) has churned.**
-
-- **Primary Churn Drivers:** Competitor switching (**36%**) is the leading cause of attrition, followed equally by low engagement (**32%**) and prolonged inactivity (**32%**).
-- **Zero Promotional Lift on Basket Size:** Blanket discounts failed to increase order value—average spend remained virtually identical with a promotion (**Rs. 516.30**) vs. without (**Rs. 516.23**).
-- **The Loyalty Tier Paradox:** **Elite tier** members exhibited the highest churn rate (**55%**), whereas **Basic tier** members had the lowest churn (**41%**) and highest average CLV (**Rs. 590**), driven by longer tenure.
-- **High-CLV Win-Back Opportunity:** Scatter plot segmentation isolated a high-value cohort of previously loyal customers who recently went inactive—representing the highest-ROI target for immediate retention outreach.
-- **Geographic Risk Concentration:** The **West (60%)** and **Central (58%)** regions significantly outperformed the national churn average.
+## 🎯 Business Problem & Objectives
+High customer acquisition costs make retention critical to retail profitability, yet blanket discounting often erodes margin without improving loyalty. Using transactional, demographic, store, and loyalty program data, this project answers four core business questions:
+1. **Attrition & Root-Cause Diagnosis:** What share of the customer base has churned, and what are the primary operational or competitive drivers?
+2. **Promotional ROI & Basket Lift:** Do promotional discounts measurably increase average order value or repeat purchase frequency?
+3. **Loyalty Tier Effectiveness:** How do churn rates, point redemption rates, and Customer Lifetime Value (CLV) compare across Basic, Silver, Gold, and Elite tiers?
+4. **Channel & Regional Risk:** How does customer retention vary across in-store vs. online channels, store formats, and geographic regions?
 
 ---
 
-## 🛠️ Data Model & DAX Architecture
+## 📊 Key Analytical Findings
 
-### Relational Schema
-The Power BI data model connects transactional records with customer, loyalty, and store attributes across five normalized tables:
-
-- **`Customer_Transactions` (Fact Table):** Granular purchase records linked via `Customer_ID` (`*:1`) and `Store_ID` (`*:1`).
-- **`Customer_Demographics` (Dimension):** Core customer profile (age, gender, region, income bracket, tenure, preferred channel).
-- **`Store_Locations` (Dimension):** Store format (Supercenter, Sam's Club, etc.), region, and opening year.
-- **`Loyalty_Program` & `Churn_Labelled_Customers` (Attribute Tables):** Linked `1:1` via `Customer_ID` to track points earned/redeemed, tier status, and churn classification.
-
-### Core DAX Measures & Calculated Columns
-- **Churn Rate %:** `DIVIDE([Churned Customers], [Total Customers], 0)`
-- **Customer Lifetime Value (CLV):** `DIVIDE([Total Amount Spent], [Membership Duration (Years)], 0)`
-- **Purchase Frequency Tiers:** Segmented into **Low-Tier** (0–3 orders), **Mid-Tier** (4–8 orders), and **High-Tier** (9+ orders).
-- **Age Cohorts:** Grouped into 5 demographic brackets (`18–25`, `26–35`, `36–45`, `46–55`, `55+`).
+| Metric | Value | Business Insight |
+| :--- | :--- | :--- |
+| **Overall Churn Rate** | `49.67%` (`149 / 300`) | Nearly half of the customer base has churned, funneling down from `300` total to `251` repeat customers. |
+| **Top Churn Driver** | `36%` Competitor Switching | Competitor switching leads attrition, followed equally by **low engagement (32%)** and **prolonged inactivity (32%)**. |
+| **Promotional Basket Lift** | `Rs. 516.30` vs. `Rs. 516.23` | Despite **49% promotional coverage**, average spend with vs. without a promotion is virtually identical—confirming zero basket lift. |
+| **Loyalty Tier Paradox** | `55%` Elite Churn | **Elite tier** members showed the highest churn (**55%**), while **Basic tier** members had the lowest churn (**41%**) and highest avg CLV (**Rs. 590**) due to longer tenure. |
+| **Channel & Income Gap** | `53.55%` In-Store Churn | In-store shoppers churn faster than online shoppers (**45.52%**), and low-income segments experience the highest attrition (**53%**). |
+| **Regional Risk Outliers** | `60%` West / `58%` Central | **West (60%)** and **Central (58%)** regions significantly exceed the national churn average, while churn stays near **50%** across all store formats. |
 
 ---
 
-## 📈 Dashboard Walkthrough
-
-### 1. Churn & Retention Overview
-Diagnoses **who** is churning and **why**, featuring a retention funnel (`300 Total` → `251 Repeat` → `149 Churned`). In-store shoppers churn at a higher rate (**53.55%**) than online shoppers (**45.52%**), and low-income segments show the highest attrition (**53%**).
-
-### 2. Repeat Purchase Behavior
-![Repeat Purchase Behavior](Page%202.png)
-Tracks order frequency and category stickiness. Customers aged **55+** shop most frequently (**3.8 avg orders**), **Groceries** anchor repeat visits ahead of Apparel and Electronics, and only **0.68%** of customers reach High-Tier purchase volume.
-
-### 3. Promotion & Loyalty Effectiveness
-![Promotion & Loyalty Effectiveness](Page%203.png)
-Evaluates marketing ROI across loyalty tiers. Despite a **49% promotional coverage rate**, discounts do not lift basket size, while Basic tier members show the lowest point redemption rate (**67%**).
-
-### 4. Store Performance & CLV Segmentation
-![Store Performance & CLV](Page%204.png)
-Maps CLV against recency/frequency across store formats. Churn hovers near **50% across all store types**, confirming a systemic retention gap rather than an isolated store-operations issue.
-
----
-
-## 💡 Strategic Recommendations
-
-1. **Launch Targeted High-CLV Win-Back Campaigns:** Replace blanket discounts with personalized reactivation offers aimed strictly at High-CLV inactive customers identified in the CLV segmentation matrix.
-2. **Restructure Loyalty Tier Incentives:** Introduce automated point-expiry alerts and double-point events to boost Basic tier redemption above 67%, while adding exclusive experiential perks to curb the 55% Elite tier churn.
-3. **Close the Omnichannel & Digital Gap:** Counter competitor switching (36% of churn) by promoting online ordering incentives and faster fulfillment, leveraging the lower churn rate seen among digital shoppers.
-4. **Deploy Regional Retention Interventions:** Prioritize localized marketing and customer feedback audits in the **West (60% churn)** and **Central (58% churn)** regions.
-
----
-
-## 📂 Repository Structure
+## 🏗️ Data Pipeline & Architecture
 
 ```text
-Walmart-Customer-Retention-Analytics/
-├── Customer Churn Analysis.pbix     # Power BI report (data model, DAX measures & visuals)
-├── Walmart_Report.pdf               # Executive analytical report (PDF)
-├── Walmart_Report.docx              # Editable analytical report (Word)
-├── Churn_Labelled_Customers.csv     # Churn flags, recency dates & exit reasons
-├── Customer_Demographics.csv        # Customer profile, income & channel preferences
-├── Customer_Transactions.csv        # Transaction log with spend & promotion flags
-├── Loyalty_Program.csv              # Tier status, points earned & points redeemed
-├── Store_Locations.csv              # Store format, region & launch year
-├── Page 1.png ... Page 4.png        # High-resolution dashboard exports
-└── README.md
+┌───────────────────────────┐     ┌──────────────────────────────────┐     ┌──────────────────────────────┐
+│  5 Multi-Table Retail CSVs│ ──► │   Power BI Relational Model      │ ──► │  4-Page Executive Report     │
+│ • Transactions & Churn    │     │ • 5 Normalized Tables (1:1 & *:1)│     │ • Churn & Root-Cause Overview│
+│ • Demographics & Loyalty  │     │ • Core DAX KPIs (Churn %, CLV)   │     │ • Repeat Purchase & Loyalty  │
+│ • Store Locations         │     │ • Frequency & Age Cohort Tiers   │     │ • Store & CLV Segmentation   │
+└───────────────────────────┘     └──────────────────────────────────┘     └──────────────────────────────┘
