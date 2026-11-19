@@ -39,3 +39,8 @@ High customer acquisition costs make retention critical to retail profitability,
 │ • Demographics & Loyalty  │     │ • Core DAX KPIs (Churn %, CLV)   │     │ • Repeat Purchase & Loyalty  │
 │ • Store Locations         │     │ • Frequency & Age Cohort Tiers   │     │ • Store & CLV Segmentation   │
 └───────────────────────────┘     └──────────────────────────────────┘     └──────────────────────────────┘
+```
+
+---
+## 👤 Author
+**Kailash Choudhary** | [LinkedIn](https://www.linkedin.com/in/kailashchoudharydata/) | [GitHub](https://github.com/KailasH1245)
